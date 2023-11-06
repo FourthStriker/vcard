@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu vCard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1f235a;
+            margin: 0;
+            padding: 0;
+        }
+
+        .vcard {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            position: relative; /* Para posicionar o botão no contexto do vCard */
+        }
+
+        .vcard img {
+            max-width: 100%;
+            border-radius: 50%;
+        }
+
+        .name {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .job-title {
+            font-size: 18px;
+            color: #888;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: #000000;
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links img {
+            width: 30px; /* Defina o tamanho desejado para os ícones */
+            height: 30px; /* Defina o tamanho desejado para os ícones */
+        }
+
+        /* Estilize o botão "Salvar Contato" */
+        .save-contact-button {
+            position: absolute;
+            bottom: 10px; /* Distância do fundo */
+            right: 10px; /* Distância da direita */
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilo para o ícone do botão "Salvar Contato" */
+        .save-contact-button img {
+            width: 30px; /* Defina o tamanho desejado para o ícone do botão */
+            height: 30px; /* Defina o tamanho desejado para o ícone do botão */
+        }
+    </style>
+</head>
+<body>
+    <div class="vcard">
+        <img src="Paulo.jpg" alt="Eu">
+        <h1 class="name">Paulo Afonso</h1>
+        <p class="job-title">Estudante de Matemática</p>
+        <div class="contact-info">
+            <p>Email: pauloafonsomcl@gmail.com</p>
+            <p>Telefone: (85) 98581-7424</p>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/pauloafonso.loureiro?locale=pt_BR" target="_blank">
+                <img src="facebook.png" alt="Facebook">
+            
+            </a>
+            <a href="https://www.instagram.com/paulo4f" target="_blank">
+                <img src="instagram.png" alt="Instagram">
+            
+            </a>
+            <a href="https://wa.me/5585985817424" target="_blank">
+                <img src="whatsapp.png" alt="Whatsapp">
+            
+            </a>
+        </div>
+
+        <!-- Botão "Salvar Contato" no canto inferior direito do vCard -->
+        <a class="save-contact-button" id="save-contact-button" href="#">
+            <img src="icone-salvar-contato.png" alt="Salvar Contato">
+        
+        </a>
+    </div>
+
+    <script>
+        document.getElementById('save-contact-button').addEventListener('click', function () {
+            var contactData = 'BEGIN:VCARD\n' +
+                'VERSION:3.0\n' +
+                'FN:Paulo Afonso\n' +
+                'ORG:Estudante de Matemática\n' +
+                'EMAIL:pauloafonsomcl@gmail.com\n' +
+                'TEL:(85) 98581-7424\n' +
+                'END:VCARD';
+
+            var blob = new Blob([contactData], { type: 'text/vcard' });
+            var url = window.URL.createObjectURL(blob);
+
+            var a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'contato.vcf';
+
+            document.body.appendChild(a);
+            a.click();
+
+            window.URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>
